@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSF_MAPS_WEB", "GSF_MAPS\GSF_MAPS_WEB.csproj", "{97946DD5-EE97-4E95-B1F5-4728A100117B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSF_MAPS.Tests", "GSF_MAPS.Tests\GSF_MAPS.Tests.csproj", "{146A9498-611D-4C6B-A67D-16A5D74EEAC2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GSF_MAPS_Database", "GSF_Database\GSF_MAPS_Database.sqlproj", "{320CAF5F-6C38-4890-96AE-907306C91E7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSF_MAPS_BUSINESS", "GSF_MAPS_BUSINESS\GSF_MAPS_BUSINESS.csproj", "{067196A0-CDDC-4E26-9CEA-23465F172CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSF_MAPS_DATA_ACCESS", "GSF_MAPS_DATA_ACCESS\GSF_MAPS_DATA_ACCESS.csproj", "{BD5176E5-FE65-43FF-AFAE-9DD25A75BC81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97946DD5-EE97-4E95-B1F5-4728A100117B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97946DD5-EE97-4E95-B1F5-4728A100117B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97946DD5-EE97-4E95-B1F5-4728A100117B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97946DD5-EE97-4E95-B1F5-4728A100117B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146A9498-611D-4C6B-A67D-16A5D74EEAC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146A9498-611D-4C6B-A67D-16A5D74EEAC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146A9498-611D-4C6B-A67D-16A5D74EEAC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146A9498-611D-4C6B-A67D-16A5D74EEAC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320CAF5F-6C38-4890-96AE-907306C91E7D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{067196A0-CDDC-4E26-9CEA-23465F172CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067196A0-CDDC-4E26-9CEA-23465F172CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067196A0-CDDC-4E26-9CEA-23465F172CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067196A0-CDDC-4E26-9CEA-23465F172CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5176E5-FE65-43FF-AFAE-9DD25A75BC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5176E5-FE65-43FF-AFAE-9DD25A75BC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5176E5-FE65-43FF-AFAE-9DD25A75BC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5176E5-FE65-43FF-AFAE-9DD25A75BC81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

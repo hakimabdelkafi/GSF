@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GSFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Batiment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_site" Type="int" />
+          <Property Name="designation" Type="varchar" MaxLength="50" />
+          <Property Name="position_X0" Type="int" />
+          <Property Name="position_Y0" Type="int" />
+          <Property Name="position_X1" Type="int" />
+          <Property Name="position_Y1" Type="int" />
+          <Property Name="repertoire_image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Etage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_batiment" Type="int" />
+          <Property Name="designation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="repertoire_image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Locaux">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_etage" Type="int" />
+          <Property Name="designation" Type="varchar" MaxLength="50" />
+          <Property Name="position_X0" Type="int" />
+          <Property Name="position_Y0" Type="int" />
+          <Property Name="position_X1" Type="int" />
+          <Property Name="position_Y1" Type="int" />
+          <Property Name="repertoire_image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="designation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="50" />
+          <Property Name="repertoire_image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_etage" Type="int" />
+          <Property Name="id_locaux" Type="int" />
+        </EntityType>
+        <Association Name="FK_Batiment_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="0..1" />
+          <End Role="Batiment" Type="Self.Batiment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Batiment">
+              <PropertyRef Name="id_site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Etage_Etage">
+          <End Role="Batiment" Type="Self.Batiment" Multiplicity="0..1" />
+          <End Role="Etage" Type="Self.Etage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batiment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Etage">
+              <PropertyRef Name="id_batiment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locaux_Etage">
+          <End Role="Etage" Type="Self.Etage" Multiplicity="0..1" />
+          <End Role="Locaux" Type="Self.Locaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Locaux">
+              <PropertyRef Name="id_etage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Etage">
+          <End Role="Etage" Type="Self.Etage" Multiplicity="0..1" />
+          <End Role="Zone" Type="Self.Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zone">
+              <PropertyRef Name="id_etage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Locaux">
+          <End Role="Locaux" Type="Self.Locaux" Multiplicity="0..1" />
+          <End Role="Zone" Type="Self.Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locaux">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zone">
+              <PropertyRef Name="id_locaux" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSFModelStoreContainer">
+          <EntitySet Name="Batiment" EntityType="Self.Batiment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etage" EntityType="Self.Etage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locaux" EntityType="Self.Locaux" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zone" EntityType="Self.Zone" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Batiment_Site" Association="Self.FK_Batiment_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Batiment" EntitySet="Batiment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Etage_Etage" Association="Self.FK_Etage_Etage">
+            <End Role="Batiment" EntitySet="Batiment" />
+            <End Role="Etage" EntitySet="Etage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locaux_Etage" Association="Self.FK_Locaux_Etage">
+            <End Role="Etage" EntitySet="Etage" />
+            <End Role="Locaux" EntitySet="Locaux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Etage" Association="Self.FK_Zone_Etage">
+            <End Role="Etage" EntitySet="Etage" />
+            <End Role="Zone" EntitySet="Zone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Locaux" Association="Self.FK_Zone_Locaux">
+            <End Role="Locaux" EntitySet="Locaux" />
+            <End Role="Zone" EntitySet="Zone" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GSFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Batiment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_site" Type="Int32" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="position_X0" Type="Int32" />
+          <Property Name="position_Y0" Type="Int32" />
+          <Property Name="position_X1" Type="Int32" />
+          <Property Name="position_Y1" Type="Int32" />
+          <Property Name="repertoire_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Site" Relationship="Self.FK_Batiment_Site" FromRole="Batiment" ToRole="Site" />
+          <NavigationProperty Name="Etage" Relationship="Self.FK_Etage_Etage" FromRole="Batiment" ToRole="Etage" />
+        </EntityType>
+        <EntityType Name="Etage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_batiment" Type="Int32" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="repertoire_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batiment" Relationship="Self.FK_Etage_Etage" FromRole="Etage" ToRole="Batiment" />
+          <NavigationProperty Name="Locaux" Relationship="Self.FK_Locaux_Etage" FromRole="Etage" ToRole="Locaux" />
+          <NavigationProperty Name="Zone" Relationship="Self.FK_Zone_Etage" FromRole="Etage" ToRole="Zone" />
+        </EntityType>
+        <EntityType Name="Locaux">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_etage" Type="Int32" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="position_X0" Type="Int32" />
+          <Property Name="position_Y0" Type="Int32" />
+          <Property Name="position_X1" Type="Int32" />
+          <Property Name="position_Y1" Type="Int32" />
+          <Property Name="repertoire_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Etage" Relationship="Self.FK_Locaux_Etage" FromRole="Locaux" ToRole="Etage" />
+          <NavigationProperty Name="Zone" Relationship="Self.FK_Zone_Locaux" FromRole="Locaux" ToRole="Zone" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="repertoire_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batiment" Relationship="Self.FK_Batiment_Site" FromRole="Site" ToRole="Batiment" />
+        </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_etage" Type="Int32" />
+          <Property Name="id_locaux" Type="Int32" />
+          <NavigationProperty Name="Etage" Relationship="Self.FK_Zone_Etage" FromRole="Zone" ToRole="Etage" />
+          <NavigationProperty Name="Locaux" Relationship="Self.FK_Zone_Locaux" FromRole="Zone" ToRole="Locaux" />
+        </EntityType>
+        <Association Name="FK_Batiment_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="0..1" />
+          <End Role="Batiment" Type="Self.Batiment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Batiment">
+              <PropertyRef Name="id_site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Etage_Etage">
+          <End Role="Batiment" Type="Self.Batiment" Multiplicity="0..1" />
+          <End Role="Etage" Type="Self.Etage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batiment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Etage">
+              <PropertyRef Name="id_batiment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Locaux_Etage">
+          <End Role="Etage" Type="Self.Etage" Multiplicity="0..1" />
+          <End Role="Locaux" Type="Self.Locaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Locaux">
+              <PropertyRef Name="id_etage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Etage">
+          <End Role="Etage" Type="Self.Etage" Multiplicity="0..1" />
+          <End Role="Zone" Type="Self.Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zone">
+              <PropertyRef Name="id_etage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Locaux">
+          <End Role="Locaux" Type="Self.Locaux" Multiplicity="0..1" />
+          <End Role="Zone" Type="Self.Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locaux">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zone">
+              <PropertyRef Name="id_locaux" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Batiment" EntityType="Self.Batiment" />
+          <EntitySet Name="Etage" EntityType="Self.Etage" />
+          <EntitySet Name="Locaux" EntityType="Self.Locaux" />
+          <EntitySet Name="Site" EntityType="Self.Site" />
+          <EntitySet Name="Zone" EntityType="Self.Zone" />
+          <AssociationSet Name="FK_Batiment_Site" Association="Self.FK_Batiment_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Batiment" EntitySet="Batiment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Etage_Etage" Association="Self.FK_Etage_Etage">
+            <End Role="Batiment" EntitySet="Batiment" />
+            <End Role="Etage" EntitySet="Etage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locaux_Etage" Association="Self.FK_Locaux_Etage">
+            <End Role="Etage" EntitySet="Etage" />
+            <End Role="Locaux" EntitySet="Locaux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Etage" Association="Self.FK_Zone_Etage">
+            <End Role="Etage" EntitySet="Etage" />
+            <End Role="Zone" EntitySet="Zone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Locaux" Association="Self.FK_Zone_Locaux">
+            <End Role="Locaux" EntitySet="Locaux" />
+            <End Role="Zone" EntitySet="Zone" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GSFModelStoreContainer" CdmEntityContainer="GSFEntities">
+          <EntitySetMapping Name="Batiment">
+            <EntityTypeMapping TypeName="GSFModel.Batiment">
+              <MappingFragment StoreEntitySet="Batiment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_site" ColumnName="id_site" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="position_X0" ColumnName="position_X0" />
+                <ScalarProperty Name="position_Y0" ColumnName="position_Y0" />
+                <ScalarProperty Name="position_X1" ColumnName="position_X1" />
+                <ScalarProperty Name="position_Y1" ColumnName="position_Y1" />
+                <ScalarProperty Name="repertoire_image" ColumnName="repertoire_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etage">
+            <EntityTypeMapping TypeName="GSFModel.Etage">
+              <MappingFragment StoreEntitySet="Etage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_batiment" ColumnName="id_batiment" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="repertoire_image" ColumnName="repertoire_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locaux">
+            <EntityTypeMapping TypeName="GSFModel.Locaux">
+              <MappingFragment StoreEntitySet="Locaux">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_etage" ColumnName="id_etage" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="position_X0" ColumnName="position_X0" />
+                <ScalarProperty Name="position_Y0" ColumnName="position_Y0" />
+                <ScalarProperty Name="position_X1" ColumnName="position_X1" />
+                <ScalarProperty Name="position_Y1" ColumnName="position_Y1" />
+                <ScalarProperty Name="repertoire_image" ColumnName="repertoire_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Site">
+            <EntityTypeMapping TypeName="GSFModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="repertoire_image" ColumnName="repertoire_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zone">
+            <EntityTypeMapping TypeName="GSFModel.Zone">
+              <MappingFragment StoreEntitySet="Zone">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_etage" ColumnName="id_etage" />
+                <ScalarProperty Name="id_locaux" ColumnName="id_locaux" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
